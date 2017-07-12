@@ -1,0 +1,22 @@
+#login {
+    margin-top: 10%;
+}
+
+#loading {
+    display: block;
+    position: fixed;
+    left: 25vw;
+    top: 25vh;
+    width: 50vw;
+    height: 50vh;
+    min-width: 200px;
+    min-height: 200px;
+    border: 4px solid lightcoral;
+    background-color: white;
+}
+
+#loading-status {
+    display:block;
+    position: relative;
+    top: 40%;
+}

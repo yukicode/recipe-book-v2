@@ -1,0 +1,43 @@
+<div id="details" *ngIf="hasSelectedRecipe">
+  <div class="col-xs-12">
+    <h1 class="text-center">{{selectedRecipe?.title}}</h1>
+  </div>
+  <div class="col-sm-6">
+    <img src="{{mainImagePath}}" alt="major image" class="img-responsive center-block main-img">
+  </div>
+  <div class="col-sm-6" id="recipe-detail-info">
+    <ul id="tags" class="col-xs-12 list-inline">
+      <li *ngFor="let tag of selectedRecipe?.tags" class="tag">{{tag}}</li>
+    </ul>
+    <div id="preptime" class="col-xs-12 summary">&#9200; Prep Time: {{selectedRecipe?.prepTime}}</div>
+    <div id="cooktime" class="col-xs-12 summary">&#9200; Cook Time: {{selectedRecipe?.cookTime}}</div>
+    <div id="serving" class="col-xs-12 summary">&#9924; Serving: {{selectedRecipe?.serving}}</div>
+    <div id="description" class="col-xs-12 summary">{{selectedRecipe?.description}}</div>
+  </div>
+
+  <div id="ingredients" class="col-xs-12 underlined">
+    <h3 id="ing-title" class="text-center">INGREDIENTS</h3>
+    <p *ngFor="let item of selectedRecipe?.ingredients; let i = index;" class="col-xs-12 ingredient-item" [ngClass]="{'ing-selected': selectedIngredients[i]}">
+      <span class="check-icon" (click)="toggleSelect(i)" [ngClass]="{'ing-selected': selectedIngredients[i]}">&#10004;</span>      {{item.name}}, {{item.amount}} {{item.unit}}
+    </p>
+
+    <div class="col-xs-12 text-center">
+      <div class="btn-group" role="group">
+        <button id="addSelected" type="button" class="btn btn-default" (click)="addSelectedToList()">&#10004; All Selected To Shopping List</button>
+        <button id="add" type="button" class="btn btn-default" (click)="addAllToList()">Add All to Shopping List</button>
+      </div>
+    </div>
+  </div>
+  <div id="direction" class="col-xs-12 underlined">
+    <h3 id="ing-title" class="text-center">DIRECTION</h3>
+    <p *ngFor="let item of selectedRecipe?.steps; let i = index;" class="col-xs-12 direction-item">
+      <span class="round-icon">{{i+1}}</span>
+      {{item}}
+    </p>
+  </div>
+  <div id="end" class="col-xs-12">
+  </div>
+</div>
+<div *ngIf="!hasSelectedRecipe"> 
+  <h1>Please select a recipe!</h1>
+</div>

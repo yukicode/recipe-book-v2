@@ -1,0 +1,27 @@
+ul {
+    padding: 10px 10px 0 10px;
+}
+
+li:hover {
+    -webkit-box-shadow: 4px 5px 9px -3px rgba(0,0,0,0.45);
+    -moz-box-shadow: 4px 5px 9px -3px rgba(0,0,0,0.45);
+    box-shadow: 4px 5px 9px -3px rgba(0,0,0,0.45);
+    left: 10px;
+}
+
+.active-link>li {
+    border: 2px solid #feaa26;
+}
+
+li {
+    display: block;
+    position: relative;
+    list-style-type: none;
+    border-radius: 2px;
+    border: 1px solid silver;
+    margin: 5px 0 5px 0;
+    left: 0;
+    color: black;
+    background-color: white;
+    transition: left 0.3s, background-color 0.3s ease-out;
+}

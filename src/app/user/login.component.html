@@ -1,0 +1,21 @@
+<div class="container" id="login">
+  <div class="row">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="text" id="email" class="form-control" formControlName="email">        
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" class="form-control" formControlName="password">        
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid" (click)="toggleLoadingState()">Login</button>
+        <button type="button" class="btn btn-default" routerLink="/signup">Sign Up</button>
+      </div>
+      <div id="loading" [@loadingState] *ngIf='loadingState' class="text-center">
+        <h2 id="loading-status">{{loadingMessage}}</h2>
+      </div>
+    </form>
+  </div>
+</div>

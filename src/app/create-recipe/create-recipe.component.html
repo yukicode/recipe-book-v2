@@ -1,0 +1,228 @@
+<div class="container" id="create-recipe" *ngIf="isAuth">
+  <div class="row">
+    <div class="col-sm-6" id="form">
+      <h1 class="text-center">RECIPE</h1>
+      <form novalidate class="form" [formGroup]="myForm">
+        <div class="form-group col-xs-12">
+          <label for="recipe-title">Title</label>
+          <input type="text" class="form-control" id="recipe-title" formControlName="title" (blur)="setTitle()" required placeholder="Edit Title Here">
+        </div>
+        <div class="form-group col-xs-12">
+          <label for="recipe-image">Image</label>
+          <input type="text" class="form-control" id="recipe-image" formControlName="imagePath" (blur)="setImagePath()" required placeholder="Image Link">
+        </div>
+        <div formArrayName="tags">
+          <div class="form-inline col-xs-12">
+            <label>Tags</label>
+          </div>
+          <div *ngFor="let tag of myForm.controls.tags.controls; let i=index">
+            <div class="form-group col-xs-4">
+              <span class="close-tag" (click)="deleteTag(i)">X</span>
+              <input type="text" class="form-control tag" [formControlName]="i" (blur)="addTag(i)">
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 separation">
+        </div>
+        <div class="form-group col-xs-6">
+          <label for="recipe-prep-time">Preparation Time</label>
+          <input type="text" class="form-control" id="recipe-prep-time" formControlName="prepTime" (blur)="setPrepTime()" required
+            placeholder="Preparation Time">
+        </div>
+        <div class="form-group col-xs-6">
+          <label for="recipe-prep-time">Cook Time</label>
+          <input type="text" class="form-control" id="recipe-cook-time" formControlName="cookTime" (blur)="setCookTime()" required
+            placeholder="Cook Time">
+        </div>
+        <div class="form-group col-xs-12">
+          <label for="recipe-description">Description</label>
+          <textarea type="text" class="form-control" id="recipe-description" formControlName="description" (blur)="setDescription()"
+            required placeholder="Description"></textarea>
+        </div>
+        <div formArrayName="ingredients">
+          <div class="form-inline col-xs-12">
+            <label>Ingredients</label>
+          </div>
+          <label class="col-xs-6">Name</label>
+          <label class="col-xs-2">Amount</label>
+          <label class="col-xs-4">Unit</label>
+          <div *ngFor="let ingredient of myForm.controls.ingredients.controls; let i=index">
+            <div [formGroupName]="i">
+              <div class="col-xs-6">
+                <span class="close-ing" (click)="deleteIngredient(i)">X</span>
+                <input type="text" class="form-control name-ing" formControlName="name" (blur)="updateIngredientName(i)">
+              </div>
+              <div class="form-group col-xs-2">
+                <input type="text" class="form-control" formControlName="amount" (blur)="updateIngredientAmount(i)">
+              </div>
+              <div class="form-group col-xs-4">
+                <input type="text" class="form-control" formControlName="unit" (blur)="updateIngredientUnit(i)">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div formArrayName="directions">
+          <label class="col-xs-12">Directions</label>
+          <div *ngFor="let dir of myForm.controls.directions.controls; let i=index">
+            <div class="form-group col-xs-12">
+              <textarea type="text" class="form-control" [formControlName]="i" (blur)="addDirection(i)"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12">
+          <button type="submit" class="btn btn-primary" (click)="submitForm()">Submit</button>
+          <button type="button" class="btn btn-default">Reset</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-sm-6" id="preview">
+      <h1 class="text-center">PREVIEW</h1>
+      <div class="col-xs-12">
+        <h1 class="text-center">{{recipe?.title}}</h1>
+      </div>
+      <div class="col-sm-6">
+        <img src="{{recipe?.imagePaths[0]}}" alt="major image" class="img-responsive center-block main-img">
+      </div>
+      <div class="col-sm-6" id="recipe-detail-info">
+        <ul id="tags" class="col-xs-12 list-inline">
+          <li *ngFor="let tag of recipe?.tags" class="tag">{{tag}}</li>
+        </ul>
+        <div id="preptime" class="col-xs-12 summary">&#9200; Prep Time: {{recipe?.prepTime}}</div>
+        <div id="cooktime" class="col-xs-12 summary">&#9200; Cook Time: {{recipe?.cookTime}}</div>
+        <div id="serving" class="col-xs-12 summary">&#9924; Serving: {{recipe?.serving}}</div>
+        <div id="description" class="col-xs-12 summary">{{recipe?.description}}</div>
+      </div>
+      <div id="ingredients" class="col-xs-12 underlined">
+        <h3 id="ing-title" class="text-center">INGREDIENTS</h3>
+        <p *ngFor="let item of recipe.ingredients; let i = index;" class="col-xs-12 ingredient-item">
+          <span class="check-icon">&#10004;</span> {{item?.name}}, {{item?.amountString}} {{item?.unit}}
+        </p>
+      </div>
+      <div id="direction" class="col-xs-12 underlined">
+        <h3 id="ing-title" class="text-center">DIRECTION</h3>
+        <p *ngFor="let item of recipe.steps; let i = index;" class="col-xs-12 direction-item">
+          <span class="round-icon">{{i+1}}</span> {{item}}
+        </p>
+      </div>
+      <div id="end" class="col-xs-12">
+      </div>
+    </div>
+    <!--<div class="col-sm-6">
+        <div class="add text-center">
+          <div class="form-inline row" id="add-local-img">
+            <input type="file" class="form-control" name="recipe-image-local" (change)="getImage($event)">
+            <button class="btn btn-default" (click)="setImage()">Upload</button>
+          </div>
+          <p id="or">or</p>
+          <div class="form-inline row">
+            <input type="text" class="form-control" name="recipe-image-link" (blur)="getImage($event)" placeholder="Enter image URL">
+            <button class="btn btn-default" (click)="setImage()">Confirm</button>
+          </div>
+        </div>
+        <img src="{{mainImagePath}}" alt="major image" class="img-responsive center-block main-img">
+      </div>
+      <div class="col-sm-6" id="recipe-detail-info">
+        <ul id="tags" class="col-xs-12 list-inline">
+          <li *ngFor="let tag of recipe.tags; let i = index;" class="tag">
+            <div class="form-inline">
+              <span class="tag-text" [hidden]="isEditingTags[i]" (click)="editTag(i)">{{tag}}</span>
+              <input type="text" name="recipe-tag" class="form-control recipe-tag" [ngModel]="tag" [ngClass]="{'hide': !isEditingTags[i]}" (blur)="setNewTag($event, i)" placeholder="Tag">
+              <span class="close-tag" (click)="deleteTag(i)">X</span>
+            </div>
+          </li>
+        </ul>
+        <div id="preptime" class="col-xs-12 summary form-inline">&#9200; Prep Time: 
+          <span [hidden] = "isEditingPrepTime" (click)="setPrepTime()">{{recipe.prepTime}}</span> 
+          <input type="text" name="recipe-perp-time" class="form-control" [(ngModel)]="recipe.prepTime" [ngClass]="{'hide': !isEditingPrepTime}" (blur)="setPrepTime()" placeholder="Edit prep time">
+        </div>
+        <div id="cooktime" class="col-xs-12 summary form-inline">&#9200; Cook Time: 
+          <span [hidden] = "isEditingCookTime" (click)="setCookTime()">{{recipe.cookTime}}</span> 
+          <input type="text" name="recipe-cook-time" class="form-control" [(ngModel)]="recipe.cookTime" [ngClass]="{'hide': !isEditingCookTime}" (blur)="setCookTime()" placeholder="Edit cook time">
+        </div>
+        <div id="serving" class="col-xs-12 summary form-inline">&#9924; Serving: 
+          <span [hidden] = "isEditingServing" (click)="setServing()">{{recipe.serving}}</span> 
+          <input type="text" name="recipe-serving" class="form-control" [(ngModel)]="recipe.serving" [ngClass]="{'hide': !isEditingServing}" (blur)="setServing()" placeholder="Edit serving">
+        </div>
+        <div id="description" class="col-xs-12 summary"> 
+          <span [hidden] = "isEditingDescription" (click)="setDescription()">{{recipe.description}}</span> 
+          <textarea type="text" name="recipe-description" class="form-control" [(ngModel)]="recipe.description" [ngClass]="{'hide': !isEditingDescription}" (blur)="setDescription()" placeholder="Edit Description Here"></textarea>
+        </div>
+      </div>
+      <div id="ingredients" class="col-xs-12 underlined">
+        <h3 id="ing-title" class="text-center">INGREDIENTS</h3>
+        <li *ngFor="let item of recipe.ingredients; let i = index;" class="col-xs-12 ingredient-item form-inline">
+          <span class="check-icon">&#8691;</span>
+          <span>{{item.name}}, {{item.amount}} {{item.unit}}</span>
+          <input type="text" class="form-control ingredient-form" placeholder="Name">
+          <input type="text" class="form-control ingredient-form" placeholder="Amount">
+          <input type="text" class="form-control ingredient-form" placeholder="Unit">
+          <button type="button" class="btn btn-default">Save</button>
+        </li>-->
+    <!--<div id="direction" class="col-xs-12 underlined">
+        <h3 id="ing-title" class="text-center">DIRECTION</h3>
+        <p *ngFor="let item of selectedRecipe?.steps; let i = index;" class="col-xs-12 direction-item">
+          <span class="round-icon">{{i+1}}</span> {{item}}
+        </p>
+      </div>
+      <div id="end" class="col-xs-12">
+      </div>
+    </div>-->
+    <!--<form class="form" #f=ngForm>
+      <div class="form-group col-xs-12">
+        <label for="recipe-title">Title</label>
+        <input type="text" name="recipe-title" id="recipe-title" class="form-control" ngModel required>
+      </div>
+      <div class="form-group col-xs-4">
+        <label for="recipe-prep-tile">Preparation time</label>
+        <input type="text" name="recipe-prep-time" id="recipe-prep-time" class="form-control" ngModel required>
+      </div>
+      <div class="form-group col-xs-4">
+        <label for="recipe-cook-time">Cooking Time</label>
+        <input type="text" name="recipe-cook-time" id="recipe-title" class="form-control" ngModel required>
+      </div>
+      <div class="form-group col-xs-4">
+        <label for="recipe-serving">Serving</label>
+        <input type="text" name="recipe-serving" id="recipe-serving" class="form-control" ngModel required>
+      </div>
+      <div id="recipe-tags">
+        <label for="recipe-tags" class="col-xs-12">Tags</label>
+        <div class="form-group col-xs-2">
+          <input type="text" name="recipe-tag" id="recipe-tag" class="form-control" ngModel required>
+        </div>
+      </div>
+      <div class="form-group col-xs-12">
+        <label for="recipe-description">Description</label>
+        <input type="text" name="recipe-description" id="recipe-description" class="form-control" ngModel required>
+      </div>
+      <div id="recipe-ingredients">
+        <label class="col-xs-12">Ingredients</label>
+        <div class="form-group col-sm-6">
+          <input type="text" name="recipe-ingredient-name" id="recipe-ingredient-name" class="form-control" ngModel required>
+        </div>
+        <div class="form-group col-sm-2">
+          <input type="text" name="recipe-ingredient-amount" id="recipe-ingredient-amount" class="form-control" ngModel>
+        </div>
+        <div class="form-group col-sm-4">
+          <input type="text" name="recipe-ingredient-unit" id="recipe-ingredient-unit" class="form-control" ngModel>
+        </div>
+      </div>
+      <div id="recipe-directions">
+        <label class="col-xs-12">Directions</label>
+        <div class="form-group col-xs-12">
+          <input type="text" name="recipe-direction" id="recipe-direction" class="form-control" ngModel required>
+        </div>
+      </div>
+
+      <div id="recipe-images">
+        <label class="col-xs-12">Images</label>
+        <div class="form-group col-xs-12">
+          <input type="text" name="recipe-image" id="recipe-image" class="form-control" ngModel required>
+        </div>
+      </div>
+    </form>-->
+  </div>
+  <div id="end" class="row"></div>
+</div>
+<div id="error" *ngIf="!isAuth">
+  <h1>You are not signed in, Redirecting to Sign In page</h1>
+</div>

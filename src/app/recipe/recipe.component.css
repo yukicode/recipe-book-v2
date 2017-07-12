@@ -1,0 +1,16 @@
+#recipe {
+    font-size: 1.1em;
+    font-weight: 400;
+    background-color: white !important;
+    min-height: 90vh;
+    padding-top: 2%;
+}
+#recipe-list {
+    /*background-color: #D6F0FF;*/
+    min-height: 500px;
+}
+
+#recipe-detail {
+    min-height: 500px;
+    border-left: 2px solid #feaa26;
+}

@@ -1,0 +1,7 @@
+<div>
+  <ul class="list-group">
+      <a *ngFor="let recipe of recipes" [routerLink]="['/recipe', recipe.key]" routerLinkActive="active-link">
+        <li class="row"><app-recipe-item [recipe]="recipe"></app-recipe-item></li>
+      </a>
+  </ul>
+</div>

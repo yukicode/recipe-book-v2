@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Sans|Roboto+Condensed|Lato');
+
+* {
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+#details{
+    margin: 10px 20px 10px 10px;
+}
+
+.underlined {
+    margin: 10px 0 10px 0;
+    padding: 10px 0 10px 0;
+    border-bottom: 2px dotted silver;
+}
+
+#ing-title {
+    padding-left: 0;
+}
+
+.main-img {
+    max-height: 300px;
+    border: 2px solid white;
+    -webkit-box-shadow: 4px 5px 9px -3px rgba(0,0,0,0.45);
+    -moz-box-shadow: 4px 5px 9px -3px rgba(0,0,0,0.45);
+    box-shadow: 4px 5px 9px -3px rgba(0,0,0,0.45);
+}
+
+#recipe-detail-info {
+    height: auto;
+    position: relative;
+    display: inline-block;
+    padding-top: 1vw;
+    color:#48733B;
+    
+}
+
+.tag {
+    background-color: #87C076;
+    color: white;
+    border-radius: 5px;
+    padding: 2px 10px 2px 10px;
+    margin: 5px 5px 5px 5px;
+    font-family: lato;
+    font-size: 1.1em;
+}
+
+.summary {
+    padding: 3px;
+    font-family: lato;
+    border-radius: 5px;
+    margin: 3px 0 3px 0;
+}
+
+ul{
+    padding:0;
+}
+
+#ingredients {
+    background-color: rgba(192,118,179,0.15);
+    border-radius: 10px;
+    padding: 5px 30px 5px 30px;
+    margin: 20px 20px 5px 20px;
+}
+
+.check-icon{
+    color: silver;
+}
+
+.check-icon:hover {
+    color: black;
+    cursor: pointer;
+}
+
+.ing-selected {
+    color: black;
+    font-weight: bold;
+}
+
+.ingredient-item{
+    margin: 1px;
+}
+
+#direction {
+    background-color: rgba(125,243,170,0.2);
+    border-radius: 10px;
+    padding: 5px 30px 5px 30px;
+    margin: 0 20px 5px 20px;
+}
+
+.direction-item {
+    font-size: 1.1em;
+}
+
+.round-icon{
+    display:inine-block;
+    background-color: silver;
+    padding:0 5px 0 5px;
+    min-width:20px;
+    border-radius: 50%;
+}
+
+#end {
+    min-height: 100px;
+}

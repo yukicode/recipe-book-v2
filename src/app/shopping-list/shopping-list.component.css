@@ -1,0 +1,32 @@
+ul{
+    border: 1px solid silver;
+    border-radius: 10px;
+    min-height: 100px;
+    font-size: 1.1em;
+}
+
+.item-list {
+    font-size: 1.1em;
+    list-style: none;
+    border-bottom: 1px dotted silver;
+}
+
+.icon {
+    color: silver;
+    transition: transform 0.1s ease-out;
+    transform: scale(1, 1);
+    cursor: pointer;
+}
+
+.icon:hover {
+    color: black;
+    transform: scale(1.1, 1.1);
+}
+
+.editing {
+    color: black;
+}
+
+@media print {
+    .print-hide { display: none; }
+} 
