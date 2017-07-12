@@ -1,5 +1,4 @@
 <div id="details" *ngIf="hasSelectedRecipe">
-
   <div class="img">
     <img src="{{mainImagePath}}" alt="major image" class="img-responsive center-block main-img">
   </div>
@@ -33,13 +32,12 @@
   <div id="direction" class="col-xs-12">
     <h3 id="ing-title" class="text-center">DIRECTION</h3>
     <p *ngFor="let item of selectedRecipe?.steps; let i = index;" class="col-xs-12 direction-item">
-      <span class="round-icon">{{i+1}}</span>
-      {{item}}
+      <span class="round-icon">{{i+1}}</span> {{item}}
     </p>
   </div>
   <div id="end" class="col-xs-12">
   </div>
 </div>
-<div *ngIf="!hasSelectedRecipe"> 
+<div *ngIf="!hasSelectedRecipe">
   <h1>Please select a recipe!</h1>
 </div>

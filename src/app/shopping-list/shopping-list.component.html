@@ -1,7 +1,7 @@
 <section id="shopping-list">
   <div class="container">
     <h3 class="text-center row">Shopping List</h3>
-    
+
     <ul class="row">
       <li *ngFor="let item of items; let i = index;" class="item-list col-xs-12">
         <span class="icon print-hide" (click)=edit(i) [ngClass]="{'editing' : isEditing[i]}">&#9998;</span>
@@ -11,12 +11,13 @@
       </li>
     </ul>
 
-    <div class="text-center row print-hide">
+    <div class="text-center row print-hide buttons">
       <div class="btn-group">
         <button type="button" class="btn btn-default" (click)="print()">Print</button>
         <button type="button" class="btn btn-default" (click)="addItemActivate()">Add Item</button>
         <button type="button" class="btn btn-default" (click)="deleteAllIngredients()">Delete All</button>
       </div>
     </div>
+    
   </div>
 </section>

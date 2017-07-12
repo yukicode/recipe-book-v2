@@ -4,17 +4,32 @@
     font-family: 'Roboto Condensed', sans-serif;
 }
 
+/* #feaa26 */
+#create-recipe {
+    min-height: 90vh;
+    background-color: white;
+}
+
+.container {
+    padding: 5vh 0 0 0;
+}
+
+.row {
+    margin: 0;
+}
+
+input {
+    border-radius: 0;
+}
+
 #form{
-    border-right: 2px solid silver;
-    background-color: lightgray;
-    position: relative;
-    min-height: 100vh;
+    background-color: #feaa26;
+    min-height: 90vh;
+    padding-bottom: 10vh;
 }
 
 #preview{
-    border-left: 2px soild silver;
-    min-height: 100vh;
-    position: relative;
+    min-height: 90vh;
 }
 
 .remove-tag{
@@ -28,16 +43,15 @@
 }
 
 .close-ing, .close-tag{
-    float: left;
+    float: right;
     width: 5%;
     display: block;
     text-align: center;
-    height: 34px;
-    padding: 6px 0;
-    color: black;
-    border-left: 1px solid white;
-    border-top: 1px solid white;
-    border-bottom: 1px solid white;
+    height: 2.3em;
+    padding: 6px 2px;
+    color: white;
+    border: 1px solid white;
+    cursor: pointer;
 }
 
 .close-tag{
@@ -68,8 +82,4 @@
     padding:0 5px 0 5px;
     min-width:20px;
     border-radius: 50%;
-}
-
-#end {
-    height: 300px;
 }

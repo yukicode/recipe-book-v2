@@ -7,6 +7,7 @@ import { AuthService } from '../services/auth.service';
 
 import { Recipe } from '../recipe';
 import { Ingredient } from '../ingredient';
+import { User } from '../user.interface';
 
 @Component({
   selector: 'app-create-recipe',
@@ -19,6 +20,7 @@ export class CreateRecipeComponent implements OnInit {
   recipe: Recipe;
   myForm: FormGroup;
   isAuth: boolean;
+  user: User;
 
   constructor(
     private fb: FormBuilder,
@@ -30,8 +32,15 @@ export class CreateRecipeComponent implements OnInit {
 
   ngOnInit() {
     this.isAuth = this.auth.isAuthenticated();
+    //if not authenticated, wait for a second and retry
+    //if still not anthenticated, redirect to log in page
     if(!this.isAuth){
-      setTimeout(() => this.router.navigate(['/login']), 2000);
+      setTimeout(() => {
+        this.isAuth = this.auth.isAuthenticated();
+        if(!this.isAuth){
+          setTimeout(() => this.router.navigate(['/login']), 2000)
+        };
+      }, 1000);
     }
 
     this.recipe = new Recipe();
@@ -97,8 +106,8 @@ export class CreateRecipeComponent implements OnInit {
     this.recipe.cookTime = this.myForm.controls['cookTime'].value;
   }
 
-  setDescription(): void {
-    this.recipe.description = this.myForm.controls['description'].value;
+  setServing(): void {
+    this.recipe.serving = this.myForm.controls['serving'].value;
   }
 
   initIngreident(): FormGroup {

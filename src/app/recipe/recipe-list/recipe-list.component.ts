@@ -19,7 +19,6 @@ export class RecipeListComponent implements OnInit {
     this.subscription = this.dataService.recipeObserver.subscribe(
       data => { this.recipes = data; }
     );
-    this.dataService.getAllRecipes();
   }
 
   ngOnDestroy() {
