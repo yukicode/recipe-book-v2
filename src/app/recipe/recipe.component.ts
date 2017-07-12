@@ -7,5 +7,11 @@ import {Recipe} from "../recipe";
   styleUrls: ['./recipe.component.css']
 })
 export class RecipeComponent{
+  isShown: boolean = false;
   constructor() { }
+
+  toggleMenu(){
+    this.isShown = !this.isShown;
+    console.log(this.isShown);
+  }
 }

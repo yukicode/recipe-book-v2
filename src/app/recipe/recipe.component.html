@@ -1,9 +1,12 @@
 <section id="recipe" class="container-fluid">
   <div class="row">
-    <aside id="recipe-list" class="col-sm-4">
+    <aside id="recipe-list" class="col-md-4" [ngClass]="{'show': isShown}">
       <app-recipe-list></app-recipe-list>
     </aside>
-    <main id="recipe-detail" class="col-sm-8">
+    <div id="sidebar-handle" (click)="toggleMenu()" [ngClass]="{'moveleft': isShown}">
+      >
+    </div>
+    <main id="recipe-detail" class="col-md-8">
       <router-outlet></router-outlet>
     </main>
   </div>
