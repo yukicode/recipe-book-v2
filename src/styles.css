@@ -6,7 +6,7 @@ body {
     background-color: lightgray;
 }
 
-.btn-default {
+.btn-default, .btn, .btn-primary {
     border-radius: 0 !important;
     border: 1px solid silver;
 }
