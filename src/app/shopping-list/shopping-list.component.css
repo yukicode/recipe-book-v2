@@ -1,7 +1,18 @@
+section {
+    background-color: white;
+    min-height: 90vh;
+}
+
+h3 {
+    background-color: #feaa26;
+    padding: 0.5em;
+    margin: 5vw 5vw 0 5vw;
+}
+
 ul{
-    border: 1px solid silver;
-    border-radius: 10px;
-    min-height: 100px;
+    border: 2px solid #feaa26;
+    margin: 0 5vw 0 5vw;
+    min-height: 30vh;
     font-size: 1.1em;
 }
 
@@ -25,6 +36,12 @@ ul{
 
 .editing {
     color: black;
+}
+
+.print-hide {
+    padding: 0.5em;
+    margin: 0 5vw 0 5vw;
+    background-color: #feaa26;
 }
 
 @media print {

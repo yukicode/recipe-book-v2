@@ -5,3 +5,8 @@ body {
     margin: auto;
     background-color: lightgray;
 }
+
+.btn-default {
+    border-radius: 0 !important;
+    border: 1px solid silver;
+}

@@ -29,7 +29,6 @@ import { InputFocusDirective } from './directives/input-focus.directive';
 import { LoginComponent } from './user/login.component';
 import { SignupComponent } from './user/signup.component';
 import { CreateRecipeComponent } from './create-recipe/create-recipe.component';
-import { TestComponent } from './test/test.component';
 
 @NgModule({
   declarations: [
@@ -46,8 +45,7 @@ import { TestComponent } from './test/test.component';
     InputFocusDirective,
     LoginComponent,
     SignupComponent,
-    CreateRecipeComponent,
-    TestComponent
+    CreateRecipeComponent
   ],
   imports: [
     BrowserModule,
