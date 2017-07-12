@@ -19,7 +19,7 @@
   <div id="ingredients" class="col-xs-12">
     <h3 id="ing-title" class="text-center">INGREDIENTS</h3>
     <p *ngFor="let item of selectedRecipe?.ingredients; let i = index;" class="col-xs-12 ingredient-item" [ngClass]="{'ing-selected': selectedIngredients[i]}">
-      <span class="check-icon" (click)="toggleSelect(i)" [ngClass]="{'ing-selected': selectedIngredients[i]}">&#10004;</span>      {{item.name}}, {{item.amount}} {{item.unit}}
+      <span class="check-icon" (click)="toggleSelect(i)" [ngClass]="{'ing-selected': selectedIngredients[i]}">&#10004;</span>      {{item.name}}, {{item.amountString}} {{item.unit}}
     </p>
     <div class="col-xs-12 text-center" id="ing-btn">
       <div class="btn-group" role="group">

@@ -44,7 +44,7 @@ export class CreateRecipeComponent implements OnInit {
     }
 
     this.recipe = new Recipe();
-    this.recipe.imagePaths[0] = "http://placehold.it/1240x250";
+    this.recipe.imagePaths[0] = "http://placehold.it/1024x300";
     this.buildForm();
   }
 
@@ -77,7 +77,7 @@ export class CreateRecipeComponent implements OnInit {
   }
 
   setImagePath(): void {
-    this.recipe.imagePaths[0] = this.myForm.controls['imagePath'].value ? this.myForm.controls['imagePath'].value : "http://placehold.it/1240x250";
+    this.recipe.imagePaths[0] = this.myForm.controls['imagePath'].value ? this.myForm.controls['imagePath'].value : "http://placehold.it/1024x300";
   }
 
   addTag(i: number): void {
@@ -147,6 +147,9 @@ export class CreateRecipeComponent implements OnInit {
     var value = (<FormGroup>ingredientControl.controls[i]).controls['amount'].value;
     if (!this.recipe.ingredients[i]) {
       this.recipe.ingredients[i] = new Ingredient('', value, '');
+    } else if(!value)
+    {
+      return;
     } else {
       this.recipe.ingredients[i].amount = parseFloat(value);
     }

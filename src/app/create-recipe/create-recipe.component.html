@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-6" id="form">
         <h1 class="text-center">RECIPE</h1>
-        <form novalidate class="form" [formGroup]="myForm">
+        <form novalidate class="form row" [formGroup]="myForm">
           <div class="form-group col-xs-12">
             <label for="recipe-title">Title</label>
             <input type="text" class="form-control" id="recipe-title" formControlName="title" (blur)="setTitle()" required placeholder="Edit Title Here">

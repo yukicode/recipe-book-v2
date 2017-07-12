@@ -10,7 +10,7 @@ export class Ingredient {
         unit? : string
         ) {
         this.name = name;
-        this.amount = amount;
+        this.amount = amount? amount: 0;
         this.unit = unit;
     }
 
@@ -18,7 +18,7 @@ export class Ingredient {
         return this._amount;
     }
 
-    public set amount(n: number){
+    public set amount(n : number){
         this._amount = n;
         this.amountString = n ? n.toString(): '';
     }

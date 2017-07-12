@@ -17,7 +17,7 @@ export class RecipeDetailComponent implements OnInit {
   hasSelectedRecipe: boolean;
   selectedRecipe: Recipe;
   selectedIngredients: boolean[] = [];
-  mainImagePath: string = "http://placehold.it/1240x250";
+  mainImagePath: string = "http://placehold.it/1024x300";
 
   constructor(
     private shoppingListService: ShoppingListService,
@@ -37,7 +37,7 @@ export class RecipeDetailComponent implements OnInit {
         }
         this.hasSelectedRecipe = true;
         this.selectedRecipe = recipe;
-        this.mainImagePath = this.selectedRecipe.imagePaths && this.selectedRecipe.imagePaths[0] ? this.selectedRecipe.imagePaths[0] : "http://placehold.it/1240x250";
+        this.mainImagePath = this.selectedRecipe.imagePaths && this.selectedRecipe.imagePaths[0] ? this.selectedRecipe.imagePaths[0] : "http://placehold.it/1024x300";
       });
   }
 
