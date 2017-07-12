@@ -1,6 +1,7 @@
-<div class="col-xs-8">
+<div class="col-xs-8 card">
   <h3>{{recipe.title}}</h3>
-  <p>Prep: {{recipe.prepTime}} Cook: {{recipe.cookTime}}</p>
+  <p>Prep: {{recipe.prepTime}}</p>
+  <p>Cook: {{recipe.cookTime}}</p>
 </div>
 <div class="col-xs-4 img-div" *ngIf="recipe.imagePaths.length" [ngStyle]="{'background': getThumbnailImage()}">
 </div>

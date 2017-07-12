@@ -5,40 +5,30 @@
 }
 
 #details{
-    margin: 10px 20px 10px 10px;
-}
-
-.underlined {
-    margin: 10px 0 10px 0;
-    padding: 10px 0 10px 0;
-    border-bottom: 2px dotted silver;
+    margin: 10px 20px 10px 0;
 }
 
 #ing-title {
     padding-left: 0;
 }
 
+.img {
+    width: 100%;
+}
 .main-img {
-    max-height: 300px;
-    border: 2px solid white;
-    -webkit-box-shadow: 4px 5px 9px -3px rgba(0,0,0,0.45);
-    -moz-box-shadow: 4px 5px 9px -3px rgba(0,0,0,0.45);
-    box-shadow: 4px 5px 9px -3px rgba(0,0,0,0.45);
+    max-height: 25vh;
 }
 
 #recipe-detail-info {
     height: auto;
     position: relative;
     display: inline-block;
-    padding-top: 1vw;
-    color:#48733B;
-    
+    padding-top: 1vw;  
 }
 
 .tag {
-    background-color: #87C076;
+    background-color: #feaa26;
     color: white;
-    border-radius: 5px;
     padding: 2px 10px 2px 10px;
     margin: 5px 5px 5px 5px;
     font-family: lato;
@@ -48,7 +38,6 @@
 .summary {
     padding: 3px;
     font-family: lato;
-    border-radius: 5px;
     margin: 3px 0 3px 0;
 }
 
@@ -56,11 +45,15 @@ ul{
     padding:0;
 }
 
-#ingredients {
-    background-color: rgba(192,118,179,0.15);
-    border-radius: 10px;
-    padding: 5px 30px 5px 30px;
-    margin: 20px 20px 5px 20px;
+#ingredients, #direction {
+    padding: 5px 10px 5px 10px;
+    margin: 20px 20px 5px 10px;
+}
+
+#ing-title {
+    margin-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #feaa26;
 }
 
 .check-icon{
@@ -81,15 +74,20 @@ ul{
     margin: 1px;
 }
 
-#direction {
-    background-color: rgba(125,243,170,0.2);
-    border-radius: 10px;
-    padding: 5px 30px 5px 30px;
-    margin: 0 20px 5px 20px;
+#ing-btn {
+    background-color: #feaa26;
+    padding: 5px;
+    margin-top: 5px;
+}
+
+.btn-default {
+    border-radius: 0 !important;
+    border: 1px solid silver;
 }
 
 .direction-item {
     font-size: 1.1em;
+    margin-bottom: 1em;
 }
 
 .round-icon{

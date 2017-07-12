@@ -6,3 +6,11 @@
     min-height: 100%;
     padding: 0;
 }
+
+.card {
+    padding-bottom: 2px;
+}
+
+p {
+    margin-bottom: 1px;
+}
