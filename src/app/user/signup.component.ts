@@ -1,4 +1,4 @@
-import { Component, OnInit, trigger, state, style, transition, animate } from '@angular/core';
+import { Component, OnInit, OnDestroy, trigger, state, style, transition, animate } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../user.interface';
 import { AuthService } from '../services/auth.service';
@@ -32,6 +32,8 @@ export class SignupComponent implements OnInit {
   userForm: FormGroup;
   loadingState: boolean = false;
   loadingMessage: string = "Loading";
+  wait_1: any;
+  wait_2: any;
 
   constructor(
     private fb: FormBuilder,
@@ -42,6 +44,11 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
     this.resetSignUp();
     this.buildForm();
+  }
+
+  ngOnDestroy() {
+    if(this.wait_1) {clearTimeout(this.wait_1);}
+    if(this.wait_2) {clearTimeout(this.wait_2);}
   }
 
   buildForm(): void {
@@ -135,7 +142,7 @@ export class SignupComponent implements OnInit {
       },
       error => {
         this.loadingMessage = error.message;
-        setTimeout(()=> {
+        this.wait_1 = setTimeout(()=> {
           this.toggleLoadingState();
           this.loadingMessage = "Loading";
         }
@@ -146,7 +153,7 @@ export class SignupComponent implements OnInit {
 
   successRedirect() {
     this.loadingMessage = "Redirecting";
-    setTimeout(() => this.router.navigate(['/recipe']), 1500);
+    this.wait_2 = setTimeout(() => this.router.navigate(['/recipe']), 1500);
   }
 
   resetSignUp(): void {

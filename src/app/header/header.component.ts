@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -10,14 +10,20 @@ export class HeaderComponent implements OnInit {
 
   userName: string = "User";
   user: any;
+  wait_1 : any;
+
   constructor(
     private auth: AuthService
   ){}
 
   ngOnInit() {
     if(this.userName === "User"){
-      setTimeout(() => this.isAuth(), 500);
+      this.wait_1 = setTimeout(() => this.isAuth(), 500);
     }
+  }
+
+  ngOnDestroy() {
+    if(this.wait_1) {clearTimeout(this.wait_1);}
   }
 
   isAuth(): boolean{

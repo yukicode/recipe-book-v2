@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -21,6 +21,9 @@ export class CreateRecipeComponent implements OnInit {
   myForm: FormGroup;
   isAuth: boolean;
   user: User;
+  wait_1: any;
+  wait_2: any;
+  wait_3: any;
 
   constructor(
     private fb: FormBuilder,
@@ -35,10 +38,10 @@ export class CreateRecipeComponent implements OnInit {
     //if not authenticated, wait for a second and retry
     //if still not anthenticated, redirect to log in page
     if(!this.isAuth){
-      setTimeout(() => {
+      this.wait_1 = setTimeout(() => {
         this.isAuth = this.auth.isAuthenticated();
         if(!this.isAuth){
-          setTimeout(() => this.router.navigate(['/login']), 2000)
+          this.wait_2 = setTimeout(() => this.router.navigate(['/login']), 2000)
         };
       }, 1000);
     }
@@ -46,6 +49,12 @@ export class CreateRecipeComponent implements OnInit {
     this.recipe = new Recipe();
     this.recipe.imagePaths[0] = "http://placehold.it/1024x300";
     this.buildForm();
+  }
+
+  ngOnDestroy(){
+    if(this.wait_1) {clearTimeout(this.wait_1);}
+    if(this.wait_2) {clearTimeout(this.wait_2);}
+    if(this.wait_3) {clearTimeout(this.wait_3);}
   }
 
   buildForm(): void {
@@ -178,7 +187,7 @@ export class CreateRecipeComponent implements OnInit {
   submitForm(): void{
     this.db.postNewRecipe(this.recipe).then(data => {
       this.db.getAllRecipes();
-      setTimeout(() => this.router.navigate(['/recipe']), 1000);
+      this.wait_3 = setTimeout(() => this.router.navigate(['/recipe']), 1000);
     }, error => console.log(error));
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, trigger, state, style, transition, animate } from '@angular/core';
+import { Component, OnInit, OnDestroy, trigger, state, style, transition, animate } from '@angular/core';
 import { Form, FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -32,6 +32,8 @@ export class LoginComponent implements OnInit {
   userForm: FormGroup;
   loadingState: boolean = false;
   loadingMessage: string = "Loading";
+  wait_1: any;
+  wait_2: any;
 
   constructor(
     private fb: FormBuilder,
@@ -41,6 +43,11 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.buildForm();
+  }
+
+  ngOnDestroy() {
+    if(this.wait_1) {clearTimeout(this.wait_1);}
+    if(this.wait_2) {clearTimeout(this.wait_2);}
   }
 
   buildForm() {
@@ -55,7 +62,7 @@ export class LoginComponent implements OnInit {
       user => this.successRedirect(),
       error => {
         this.loadingMessage = error.message;
-        setTimeout(() => {
+        this.wait_2 = setTimeout(() => {
           this.toggleLoadingState();
           this.loadingMessage = "Loading";
         }
@@ -70,6 +77,6 @@ export class LoginComponent implements OnInit {
 
   successRedirect() {
     this.loadingMessage = "Redirecting";
-    setTimeout(() => this.router.navigate(['/recipe']), 1500);
+    this.wait_1 = setTimeout(() => this.router.navigate(['/recipe']), 1500);
   }
 }
