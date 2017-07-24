@@ -10,8 +10,8 @@ export class StateboxComponent implements OnInit {
 
   defaultConfig = {
     show: true,
-    time: 2000,
-    display: 'Loading...'
+    title: 'Loading...',
+    content: ''
   };
 
   constructor() {
