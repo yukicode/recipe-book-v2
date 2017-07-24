@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -29,6 +30,7 @@ import { InputFocusDirective } from './directives/input-focus.directive';
 import { LoginComponent } from './user/login.component';
 import { SignupComponent } from './user/signup.component';
 import { CreateRecipeComponent } from './create-recipe/create-recipe.component';
+import { StateboxComponent } from './statebox/statebox.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,8 @@ import { CreateRecipeComponent } from './create-recipe/create-recipe.component';
     InputFocusDirective,
     LoginComponent,
     SignupComponent,
-    CreateRecipeComponent
+    CreateRecipeComponent,
+    StateboxComponent
   ],
   imports: [
     BrowserModule,
