@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 // import { RECIPES } from '../recipes.data';
-import { Recipe } from '../recipe';
+import { Recipe } from '../models/recipe';
 
 var RECIPES: Recipe[] = [];
 

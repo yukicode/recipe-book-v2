@@ -1,5 +1,5 @@
 import { Ingredient } from './ingredient';
-import { JsonProperty, Utils } from './services/utils.service';
+import { JsonProperty, Utils } from '../services/utils.service';
 
 export class Recipe {
     id: string;

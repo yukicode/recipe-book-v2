@@ -7,9 +7,9 @@ import { AuthService } from './auth.service';
 import { RecipeService } from './recipe.service';
 import { Utils } from './utils.service';
 
-import { User } from '../user.interface';
-import { Ingredient } from '../ingredient';
-import { Recipe } from '../recipe';
+import { User } from '../models/user.interface';
+import { Ingredient } from '../models/ingredient';
+import { Recipe } from '../models/recipe';
 
 
 declare var db: any;

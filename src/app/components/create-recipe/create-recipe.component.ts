@@ -2,12 +2,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { DataService } from '../services/data.service';
-import { AuthService } from '../services/auth.service';
+import { DataService } from '../../services/data.service';
+import { AuthService } from '../../services/auth.service';
 
-import { Recipe } from '../recipe';
-import { Ingredient } from '../ingredient';
-import { User } from '../user.interface';
+import { Recipe } from '../../models/recipe';
+import { Ingredient } from '../../models/ingredient';
+import { User } from '../../models/user.interface';
 
 @Component({
   selector: 'app-create-recipe',

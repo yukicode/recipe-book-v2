@@ -3,10 +3,10 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/switchMap';
 
-import { Recipe } from "../../recipe";
-import { Ingredient } from "../../ingredient";
-import { ShoppingListService } from '../../services/shopping-list.service';
-import { DataService } from '../../services/data.service';
+import { Recipe } from "../../../models/recipe";
+import { Ingredient } from "../../../models/ingredient";
+import { ShoppingListService } from '../../../services/shopping-list.service';
+import { DataService } from '../../../services/data.service';
 
 @Component({
   selector: 'app-recipe-detail',

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, trigger, state, style, transition, animate} from '@angular/core';
-import { Recipe } from '../../recipe';
-import { DataService } from '../../services/data.service';
+import { Recipe } from '../../../models/recipe';
+import { DataService } from '../../../services/data.service';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
