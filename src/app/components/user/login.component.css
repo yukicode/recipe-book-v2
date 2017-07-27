@@ -22,3 +22,10 @@
     position: relative;
     top: 40%;
 }
+
+.warning {
+    border-left: 3px solid red;
+    margin: 2px;
+    padding: 2px 0 2px 5px;
+    width: 100%;
+}

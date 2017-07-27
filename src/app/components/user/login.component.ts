@@ -33,16 +33,62 @@ export class LoginComponent implements OnInit {
 
   buildForm() {
     this.userForm = this.fb.group({
-      'email': ['', [Validators.required]],
+      'email': ['', Validators.compose([
+                    Validators.required,
+                    this.isEmail])],
       'password': ['', [Validators.required]]
     });
+
+    this.userForm.valueChanges.subscribe(
+      data => this.checkFormErrors(data)
+    );
+
+    this.checkFormErrors();
   }
 
   onSubmit() {
+    var submittingConfig = {
+      title: "Loading...",
+      updating: true,
+      show: true
+    };
+
+    this._stateboxconfig = submittingConfig;
+
     this.auth.signInUser(this.userForm.value).then(
       user => this.successRedirect(),
       error => this.displayError(error)
     );
+  }
+
+  checkFormErrors(data?: any): void {
+    if (!this.userForm) { return; }
+    var form = this.userForm;
+    for (var key in this.formErrors) {
+      this.formErrors[key] = '';
+      var control = form.get(key);
+
+      if (control && control.dirty && !control.valid) {
+        for (var err in control.errors) {
+          this.formErrors[key] += this.errorMessages[key][err] + '\n';
+        }
+      }
+    }
+  }
+
+  formErrors = {
+    'email': '',
+    'password': ''
+  };
+
+  errorMessages = {
+    'email': {
+      'required': 'Email is required',
+      'noEmail': 'The format of the email is invalid.'
+    },
+    'password': {
+      'required': 'Password is required.'
+    }
   }
 
   displayError(error) {
@@ -66,8 +112,14 @@ export class LoginComponent implements OnInit {
       updating: true,
       show: true
     }
-    
+
     this._stateboxconfig = successConfig;
     this._timer_1 = setTimeout(() => this.router.navigate(['/recipe']), 1500);
+  }
+
+  isEmail(control: FormControl): { [s: string]: boolean } {
+    if (!control.value.match(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/)) {
+      return { noEmail: true };
+    }
   }
 }
