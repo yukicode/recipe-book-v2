@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, trigger, state, style, transition, animate } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../../models/user.interface';
 import { AuthService } from '../../services/auth.service';
@@ -8,32 +8,13 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
-  animations: [
-    trigger('loadingState', [
-      state('flyIn', style({ opacity: 1, transform: 'translateY(0)' })),
-      transition('void => *', [
-        style({
-          opacity: 0,
-          transform: 'translateY(-100%)'
-        }),
-        animate('0.4s linear')
-      ]),
-      transition('* => void', [
-        animate('0.4s 10 ease-out', style({
-          opacity: 0,
-          transform: 'translateY(100%)'
-        }))
-      ])
-    ])
-  ]
 })
 
 export class SignupComponent implements OnInit {
   userForm: FormGroup;
-  loadingState: boolean = false;
-  loadingMessage: string = "Loading";
-  wait_1: any;
-  wait_2: any;
+  private _stateboxconfig: any = {};
+  private _timer_1: any;
+  private _timer_2: any;
 
   constructor(
     private fb: FormBuilder,
@@ -42,13 +23,12 @@ export class SignupComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.resetSignUp();
     this.buildForm();
   }
 
   ngOnDestroy() {
-    if(this.wait_1) {clearTimeout(this.wait_1);}
-    if(this.wait_2) {clearTimeout(this.wait_2);}
+    if(this._timer_1) {clearTimeout(this._timer_1);}
+    if(this._timer_2) {clearTimeout(this._timer_2);}
   }
 
   buildForm(): void {
@@ -129,36 +109,47 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  toggleLoadingState() {
-    this.loadingState = !this.loadingState;
-  }
-
   onSubmit() {
+    var submittingConfig = {
+      title: "Loading...",
+      updating: true,
+      show: true
+    };
+
+    this._stateboxconfig = submittingConfig;
+
     this.auth.signupUser(this.userForm.value).then(
       fuser => {
-        this.auth.updateProfile(this.userForm.value).then(
-          () => this.successRedirect()
-        );
+        this.auth.updateProfile(this.userForm.value)
+          .then(() => this.successRedirect());
       },
-      error => {
-        this.loadingMessage = error.message;
-        this.wait_1 = setTimeout(()=> {
-          this.toggleLoadingState();
-          this.loadingMessage = "Loading";
-        }
-        , 2000);
-      }
+      error => this.displayError(error)
     );
   }
 
-  successRedirect() {
-    this.loadingMessage = "Redirecting";
-    this.wait_2 = setTimeout(() => this.router.navigate(['/recipe']), 1500);
+  displayError(error) {
+    var errorConfig = {
+      title: "Error",
+      content: error.message,
+      updating: false,
+      show: true
+    };
+
+    this._stateboxconfig = errorConfig;
+    this._timer_1 = setTimeout(()=> {
+      this._stateboxconfig.show = false;
+    }, 2000);
   }
 
-  resetSignUp(): void {
-    this.userForm = null;
-    this.loadingState = false;
-    this.loadingMessage = "Loading";
+  successRedirect() {
+    var successConfig = {
+      title: "Redirecting...",
+      content: "",
+      updating: true,
+      show: true
+    }
+    
+    this._stateboxconfig = successConfig;
+    this._timer_2 = setTimeout(() => this.router.navigate(['/recipe']), 1500);
   }
 }

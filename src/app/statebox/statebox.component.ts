@@ -9,9 +9,10 @@ export class StateboxComponent implements OnInit {
   @Input() config: any;
 
   defaultConfig = {
-    show: true,
+    show: false,
     title: 'Loading...',
-    content: ''
+    content: '',
+    updating: true
   };
 
   constructor() {

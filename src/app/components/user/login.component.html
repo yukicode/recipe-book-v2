@@ -11,11 +11,11 @@
           <input type="password" id="password" class="form-control" formControlName="password">
         </div>
         <div class="text-center col-sm-12">
-          <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid" (click)="toggleLoadingState()">Login</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">Login</button>
           <button type="button" class="btn btn-default" routerLink="/signup">Sign Up</button>
         </div>
-        <app-statebox [config]="stateboxconfig"></app-statebox>
       </form>
     </div>
   </div>
+  <app-statebox [config]="_stateboxconfig"></app-statebox>
 </section>

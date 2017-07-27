@@ -2,9 +2,9 @@
   <button type="submit" class="btn btn-default" (click)="changeState()">ChangeState</button>
 </div>
 
-<div id="state-box" [ngClass]="{'show': config.show}">
+<div id="state-box" [ngClass]="{'show': config.show }">
   <div id="bar">
-    <div id="foreground"></div>
+    <div id="foreground" [ngClass]="{'updating': config.updating }"></div>
   </div>
   <div id="state-box-content">
     <h3 class="text-center">{{config.title}}</h3>

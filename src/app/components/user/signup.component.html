@@ -23,12 +23,10 @@
           <label *ngIf="formErrors['confirmPassword']" class="warning">{{formErrors['confirmPassword']}}</label>
         </div>
         <div class="text-center col-sm-12">
-          <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid" (click)="toggleLoadingState()">Submit</button>
-        </div>
-        <div id="loading" [@loadingState] *ngIf='loadingState' class="text-center">
-          <h2 id="loading-status">{{loadingMessage}}</h2>
+          <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">Submit</button>
         </div>
       </form>
     </div>
   </div>
+  <app-statebox [config]="_stateboxconfig"></app-statebox>
 </section>

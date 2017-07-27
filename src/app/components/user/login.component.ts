@@ -11,10 +11,10 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  userForm: FormGroup;
-  stateboxconfig: any = {};
-  wait_1: any;
-  wait_2: any;
+  private userForm: FormGroup;
+  private _stateboxconfig: any = {};
+  private _timer_1: any;
+  private _timer_2: any;
 
   constructor(
     private fb: FormBuilder,
@@ -27,8 +27,8 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    if(this.wait_1) {clearTimeout(this.wait_1);}
-    if(this.wait_2) {clearTimeout(this.wait_2);}
+    if(this._timer_1) {clearTimeout(this._timer_1);}
+    if(this._timer_2) {clearTimeout(this._timer_2);}
   }
 
   buildForm() {
@@ -41,23 +41,33 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.auth.signInUser(this.userForm.value).then(
       user => this.successRedirect(),
-      error => {
-        this.stateboxconfig.title = "Error";
-        this.stateboxconfig.content = error.message;
-        this.wait_2 = setTimeout(() => {
-          this.toggleLoadingState();
-        }
-          , 3000);
-      }
+      error => this.displayError(error)
     );
   }
 
-  toggleLoadingState() {
-    this.stateboxconfig.show = !this.stateboxconfig.show;
+  displayError(error) {
+    var errorConfig = {
+      title: "Error",
+      content: error.message,
+      updating: false,
+      show: true
+    };
+
+    this._stateboxconfig = errorConfig;
+    this._timer_2 = setTimeout(() => {
+      this._stateboxconfig.show = false;
+    }, 4000);
   }
 
   successRedirect() {
-    this.stateboxconfig.display = "Redirecting";
-    this.wait_1 = setTimeout(() => this.router.navigate(['/recipe']), 1500);
+    var successConfig = {
+      title: "Redirecting",
+      content: "",
+      updating: true,
+      show: true
+    }
+    
+    this._stateboxconfig = successConfig;
+    this._timer_1 = setTimeout(() => this.router.navigate(['/recipe']), 1500);
   }
 }

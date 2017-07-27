@@ -33,11 +33,7 @@
     background-color: rgba(254, 200, 114, 0.5);
 }
 
-#foreground {
-    display: block;
-    position: relative;
-    background-color: #feaa26;
-    height: 100%;
+#foreground.updating {
     -webkit-animation-name: progress-bar; /* Safari 4.0 - 8.0 */
     -webkit-animation-duration: 2s; /* Safari 4.0 - 8.0 */
     -webkit-animation-iteration-count: infinite;
@@ -46,6 +42,14 @@
     animation-duration: 1s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
+}
+
+#foreground {
+    display: block;
+    position: relative;
+    background-color: #feaa26;
+    height: 100%;
+    width: 100%;
 }
 
  @keyframes progress-bar {
