@@ -35,14 +35,14 @@ export class SignupComponent implements OnInit {
     this.userForm = this.fb.group({
       name: ['', [Validators.required]],
       email: ['', Validators.compose([
-        Validators.required,
-        this.isEmail])],
+                  Validators.required,
+                  this.isEmail])],
       password: ['', [Validators.required,
-      Validators.minLength(6),
-      Validators.maxLength(20)]],
+                      Validators.minLength(6),
+                      Validators.maxLength(20)]],
       confirmPassword: ['', Validators.compose([
-        Validators.required,
-        this.isEqualPassword.bind(this)])]
+                            Validators.required,
+                            this.isEqualPassword.bind(this)])]
     });
 
     this.userForm.valueChanges.subscribe(
@@ -50,6 +50,24 @@ export class SignupComponent implements OnInit {
     );
 
     this.checkFormErrors();
+  }
+
+  onSubmit() {
+    var submittingConfig = {
+      title: "Loading...",
+      updating: true,
+      show: true
+    };
+
+    this._stateboxconfig = submittingConfig;
+
+    this.auth.signupUser(this.userForm.value).then(
+      fuser => {
+        this.auth.updateProfile(this.userForm.value)
+          .then(() => this.successRedirect());
+      },
+      error => this.displayError(error)
+    );
   }
 
   checkFormErrors(data?: any): void {
@@ -107,24 +125,6 @@ export class SignupComponent implements OnInit {
     if (control.value !== this.userForm.controls['password'].value) {
       return { passwordsNotMatch: true };
     }
-  }
-
-  onSubmit() {
-    var submittingConfig = {
-      title: "Loading...",
-      updating: true,
-      show: true
-    };
-
-    this._stateboxconfig = submittingConfig;
-
-    this.auth.signupUser(this.userForm.value).then(
-      fuser => {
-        this.auth.updateProfile(this.userForm.value)
-          .then(() => this.successRedirect());
-      },
-      error => this.displayError(error)
-    );
   }
 
   displayError(error) {
