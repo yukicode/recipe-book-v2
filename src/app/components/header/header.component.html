@@ -1,10 +1,17 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" aria-expanded="false" (click)="toggleCollapsed()">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
       <a class="navbar-brand" routerLink="/recipe">Recipe Book</a>
     </div>
+
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
         <li><a routerLink="/recipe">Recipes</a></li>
         <li><a routerLink="/shoppinglist">Shopping List</a></li>
@@ -16,7 +23,25 @@
           <ul class="dropdown-menu">
             <li><a routerLink="/login" *ngIf="!isAuth()">Login</a></li>
             <li><a routerLink="/signup" *ngIf="!isAuth()">Signup</a></li>
-            <li role="separator" *ngIf="isAuth()" class="divider"></li>
+            <li *ngIf="isAuth()" (click)="signOut()" id="signout">Logout</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Mobile display -->
+    <div class="hidden-nav" [ngClass]="{'show-collapsed': showcollapsed}">
+      <ul class="nav navbar-nav">
+        <li><a routerLink="/recipe">Recipes</a></li>
+        <li><a routerLink="/shoppinglist">Shopping List</a></li>
+        <li><a routerLink="/create-recipe">Create Recipe</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown" appDropdown>
+          <h4 class="dropdown-toggle mobile-user-header" role="button" aria-haspopup="true" aria-expanded="false">{{userName}}<span class="caret"></span></h4>
+          <ul class="dropdown-menu">
+            <li><a routerLink="/login" *ngIf="!isAuth()">Login</a></li>
+            <li><a routerLink="/signup" *ngIf="!isAuth()">Signup</a></li>
             <li *ngIf="isAuth()" (click)="signOut()" id="signout">Logout</li>
           </ul>
         </li>

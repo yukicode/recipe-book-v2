@@ -11,3 +11,21 @@
 #signout {
     cursor: pointer;
 }
+
+.hidden-nav {
+    display: none;
+}
+
+.show-collapsed {
+    display: initial;
+}
+
+.mobile-user-header {
+    padding-left: 10px;
+}
+
+@media screen and (min-width: 768px) {
+    .show-collapsed {
+        display: none;
+    }
+}

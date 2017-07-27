@@ -11,6 +11,7 @@ export class HeaderComponent implements OnInit {
   userName: string = "User";
   user: any;
   wait_1 : any;
+  private showcollapsed: boolean = false;
 
   constructor(
     private auth: AuthService
@@ -39,5 +40,9 @@ export class HeaderComponent implements OnInit {
   signOut(){
     this.auth.signOutUser();
     this.userName = "User";
+  }
+
+  toggleCollapsed() {
+    this.showcollapsed = !this.showcollapsed;
   }
 }
