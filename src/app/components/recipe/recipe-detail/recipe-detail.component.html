@@ -23,7 +23,7 @@
     </p>
     <div class="col-xs-12 text-center" id="ing-btn">
       <div class="btn-group" role="group">
-        <button id="addSelected" type="button" class="btn btn-default" (click)="addSelectedToList()">&#10004; All Selected To Shopping List</button>
+        <button id="addSelected" type="button" class="btn btn-default" (click)="addSelectedToList()" [disabled]="!selectedIngredientsCount">&#10004; All Selected To Shopping List</button>
         <button id="add" type="button" class="btn btn-default" (click)="addAllToList()">Add All to Shopping List</button>
       </div>
     </div>

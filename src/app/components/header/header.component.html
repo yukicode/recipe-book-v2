@@ -18,6 +18,7 @@
         <li><a routerLink="/create-recipe">Create Recipe</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <li><span class="cart">&#10064;</span><span class="item-count" [@itemCountState]="triggerItemCount" [ngClass] = "{'hidden': !itemCount}">{{itemCount}}</span></li>
         <li class="dropdown" appDropdown>
           <h4 class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">{{userName}}<span class="caret"></span></h4>
           <ul class="dropdown-menu">
@@ -30,7 +31,7 @@
     </div>
 
     <!-- Mobile display -->
-    <div class="hidden-nav" [ngClass]="{'show-collapsed': showcollapsed}">
+    <div class="hidden" [ngClass]="{'show-collapsed': showcollapsed}">
       <ul class="nav navbar-nav">
         <li><a routerLink="/recipe">Recipes</a></li>
         <li><a routerLink="/shoppinglist">Shopping List</a></li>

@@ -56,6 +56,7 @@ import { StateboxComponent } from './statebox/statebox.component';
     HttpModule,
     ReactiveFormsModule,
     RecipeRoutingModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
   ],
   providers: [
