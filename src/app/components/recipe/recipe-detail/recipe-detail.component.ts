@@ -30,6 +30,7 @@ export class RecipeDetailComponent implements OnInit {
     this.activatedRoute.params
       .switchMap((params: ParamMap) => this.dataService.getSelectedRecipe(params['id']))
       .subscribe(recipe => {
+        this.selectedIngredients = [];
         if (!recipe) {
           this.hasSelectedRecipe = false;
           this.router.navigate(["/recipe"]);

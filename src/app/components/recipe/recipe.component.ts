@@ -12,6 +12,5 @@ export class RecipeComponent{
 
   toggleMenu(){
     this.isShown = !this.isShown;
-    console.log(this.isShown);
   }
 }

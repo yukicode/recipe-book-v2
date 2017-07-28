@@ -72,6 +72,7 @@ ul{
 
 .ingredient-item{
     margin: 1px;
+    cursor: pointer;
 }
 
 #ing-btn {
