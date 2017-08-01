@@ -2,6 +2,7 @@ export class Ingredient {
     _amount: number;
     _name: string;
     _unit: string;
+    _selected: boolean;
     amountString: string;
 
     constructor(
@@ -12,6 +13,7 @@ export class Ingredient {
         this.name = name;
         this.amount = amount? amount: 0;
         this.unit = unit;
+        this.selected = false;
     }
 
     public get amount(): number{
@@ -37,6 +39,14 @@ export class Ingredient {
 
     public set unit(s: string){
         this._unit = s;
+    }
+
+    public get selected() {
+        return this._selected;
+    }
+    
+    public set selected(s: boolean) {
+        this._selected = s;
     }
 }
 

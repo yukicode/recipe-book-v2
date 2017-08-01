@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Ingredient } from '../models/ingredient';
+import { Recipe } from '../models/recipe';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class ShoppingListService {
+  private _selectedRecipes: Recipe[] = [];
+  
   private _ingredients: Ingredient[] = [];
   private _names: string[] = [];
   private _index: number[] = [];
@@ -27,7 +30,7 @@ export class ShoppingListService {
     return this.itemCountObserver;
   }
 
-  addToList(items: Ingredient[], recipeName: string): void {
+  addToList(recipe: Recipe): void {
     this._index.push(this._ingredients.length);
     this._itemCount += items.length;
     this._itemCountSource.next(this._itemCount);

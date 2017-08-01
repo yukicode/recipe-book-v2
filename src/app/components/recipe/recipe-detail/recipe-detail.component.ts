@@ -16,7 +16,6 @@ import { DataService } from '../../../services/data.service';
 export class RecipeDetailComponent implements OnInit {
   hasSelectedRecipe: boolean;
   selectedRecipe: Recipe;
-  selectedIngredients: boolean[] = [];
   selectedIngredientsCount: number = 0;
   mainImagePath: string = "http://placehold.it/1024x300";
 
@@ -31,7 +30,6 @@ export class RecipeDetailComponent implements OnInit {
     this.activatedRoute.params
       .switchMap((params: ParamMap) => this.dataService.getSelectedRecipe(params['id']))
       .subscribe(recipe => {
-        this.selectedIngredients = [];
         this.selectedIngredientsCount = 0;
         
         if (!recipe) {
@@ -46,38 +44,23 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   addAllToList(): void {
-    if (!this.selectedRecipe || this.selectedRecipe.ingredients.length == 0) { return; }
-    this.shoppingListService.addToList(this.selectedRecipe.ingredients, this.selectedRecipe.title);
-
-    this.selectedIngredientsCount = this.selectedRecipe.ingredients.length;
-    for(var i=0; i< this.selectedIngredientsCount; i++)
+    let length = this.selectedRecipe.ingredients.length;
+    if (!this.selectedRecipe || length == 0) { return; }
+    for(var i=0; i< length; i++)
     {
-      this.selectedIngredients[i] = true;
+      this.selectedRecipe.ingredients[i].selected = true;
     }
+    this.selectedIngredientsCount = length;
+    //this.shoppingListService.addToList(this.selectedRecipe);
   }
 
   addSelectedToList(): void {
     if ( this.selectedIngredientsCount < 1 ) { return; }
-
-    var length = this.selectedRecipe.ingredients.length;
-    var temp = [];
-
-    for(var i=0; i<length; i++){
-      if(this.selectedIngredients[i]){
-        temp.push(this.selectedRecipe.ingredients[i]);
-      }
-    }
-
-    this.shoppingListService.addToList(temp, this.selectedRecipe.title);
+    //this.shoppingListService.addToList(this.selectedRecipe);
   }
 
   toggleSelect(i: number): void {
-    if(this.selectedIngredients[i] == undefined){
-      this.selectedIngredients[i] = true;
-    }else {
-      this.selectedIngredients[i] = !this.selectedIngredients[i];
-    }
-
-    this.selectedIngredientsCount += this.selectedIngredients[i] ? 1: -1;
+    this.selectedRecipe.ingredients[i].selected = !this.selectedRecipe.ingredients[i].selected;
+    this.selectedIngredientsCount += this.selectedRecipe.ingredients[i].selected ? 1: -1;
   }
 }

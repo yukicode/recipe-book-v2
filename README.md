@@ -2,8 +2,16 @@
 
 ## live website: https://dist-zthdqhskle.now.sh
 
-## Any one could view existing recipes
+## Todo:
 
-## One must register and login to create and add recipes
+### Recipe Component:
+#### change serving data to number
+#### add search to recipe list
+#### add paging to recipe list
+#### voice control for recipe ingredients and instructions
 
-## Front-end: Anuglar 2. Back-end: Firebase
+### Shopping List
+#### add shopping page to shopping list
+#### be able to change serving in shopping list
+#### page and summary views in shopping list
+
